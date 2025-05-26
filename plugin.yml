@@ -1,0 +1,13 @@
+name: BooksEnchant
+main: shadow\Loader
+version: 0.0.1
+author: 404_Shad0w
+api: 5.0.0
+
+permissions:
+  books.perms:
+    description: "Permission to use BooksEnchant"
+    default: true
+  books.admin:
+    description: "Permission for admin commands"
+    default: op
