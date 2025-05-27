@@ -6,6 +6,7 @@ use pocketmine\event\Listener;
 use pocketmine\event\inventory\InventoryTransactionEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\inventory\transaction\action\SlotChangeAction;
+use pocketmine\item\Armor;
 use pocketmine\item\ItemTypeIds;
 use pocketmine\item\VanillaItems;
 use pocketmine\nbt\tag\StringTag;
@@ -29,7 +30,7 @@ class Events implements Listener
             if (
                 $sourceItem->getTypeId() === ItemTypeIds::ENCHANTED_BOOK &&
                 $sourceItem->getNamedTag()->getTag('books') instanceof StringTag &&
-                $this->isArmor($targetItem)
+                $targetItem instanceof Armor
             ) {
                 $bookType = $sourceItem->getNamedTag()->getString('books', '');
                 $bookManager = BookManager::getInstance();
@@ -75,27 +76,5 @@ class Events implements Listener
     {
         $player = $event->getPlayer();
         Loader::getInstance()->getScheduler()->scheduleRepeatingTask(new EnchantTasks($player), 20);
-    }
-
-    public function isArmor($item): bool
-    {
-        return in_array($item->getTypeId(), [
-            ItemTypeIds::DIAMOND_HELMET,
-            ItemTypeIds::DIAMOND_CHESTPLATE,
-            ItemTypeIds::DIAMOND_LEGGINGS,
-            ItemTypeIds::DIAMOND_BOOTS,
-            ItemTypeIds::IRON_HELMET,
-            ItemTypeIds::IRON_CHESTPLATE,
-            ItemTypeIds::IRON_LEGGINGS,
-            ItemTypeIds::IRON_BOOTS,
-            ItemTypeIds::GOLDEN_HELMET,
-            ItemTypeIds::GOLDEN_CHESTPLATE,
-            ItemTypeIds::GOLDEN_LEGGINGS,
-            ItemTypeIds::GOLDEN_BOOTS,
-            ItemTypeIds::CHAINMAIL_HELMET,
-            ItemTypeIds::CHAINMAIL_CHESTPLATE,
-            ItemTypeIds::CHAINMAIL_LEGGINGS,
-            ItemTypeIds::CHAINMAIL_BOOTS
-        ]);
     }
 }

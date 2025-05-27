@@ -1,0 +1,8 @@
+{
+    "name": "shadow/enchanted-books",
+    "type": "project",
+    "require": {},
+    "require-dev": {
+        "pocketmine/pocketmine-mp": "5.28.2"
+    }
+}
